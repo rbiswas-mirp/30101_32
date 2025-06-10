@@ -1,0 +1,32 @@
+import serial
+import time
+
+# Replace with your ESP32 serial port
+port = "/dev/ttyACM0"  # or /dev/ttyACM0
+baudrate = 115200
+
+print("ESP32 will remain off for 300 seconds...")
+time.sleep(300)  # Wait 300 seconds before starting ESP32
+
+try:
+    # Establish serial connection
+    ser = serial.Serial(port, baudrate, timeout=1)
+    time.sleep(2)  # Allow time for the connection to be established
+    
+    print("ESP32 is now active and serial connection established.")
+    
+    # Continuously read values from ESP32
+    while True:
+        if ser.in_waiting > 0:
+            line = ser.readline().decode('utf-8').strip()
+            print(f"Received value: {line}")
+
+except serial.SerialException as e:
+    print(f"Serial Error: {e}")
+except KeyboardInterrupt:
+    print("Script interrupted by user")
+finally:
+    # Close the connection when done
+    if 'ser' in locals() and ser.is_open:
+        ser.close()
+        print("Serial connection closed")

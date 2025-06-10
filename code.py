@@ -2,7 +2,7 @@ import serial
 import time
 
 # Replace with your ESP32 serial port
-port = "/dev/ttyUSB0"  # or /dev/ttyACM0
+port = "/dev/ttyACM0"  # or /dev/ttyACM0
 baudrate = 115200
 
 try:

@@ -35,8 +35,7 @@ try:
         if ser.in_waiting > 0:
             line = ser.readline().decode('utf-8').strip()
             print(f"Received value: {line}")
-        time.sleep(0.1)
-
+            
 except serial.SerialException as e:
     print(f"Serial Error: {e}")
 except KeyboardInterrupt:
